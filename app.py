@@ -47,6 +47,6 @@ def detect_emotion():
         # Handle any errors and return an error message
         return jsonify({"error": str(e)}), 400
 
-# Run the Flask app
+# Ensure Flask runs properly when deployed on Vercel (serverless function)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
