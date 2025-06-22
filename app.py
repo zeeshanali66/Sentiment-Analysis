@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Use the Hugging Face API key directly in your code
 client = InferenceClient(
     provider="hf-inference",
-    api_key="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",  # Replace with your actual API key
+    api_key="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",  # Replace with your actual API key
 )
 
 # Function to perform sentiment analysis (emotion detection)
