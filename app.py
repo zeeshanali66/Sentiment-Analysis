@@ -5,10 +5,17 @@ import os
 # Initialize the Flask app
 app = Flask(__name__)
 
-# Use the Hugging Face API key directly in your code
+# Get the Hugging Face API key from environment variables
+huggingface_api_key = os.getenv("HUGGINGFACE_API_KEY")
+
+# Ensure the API key is loaded correctly
+if not huggingface_api_key:
+    raise ValueError("Hugging Face API key not found in environment variables")
+
+# Initialize the Hugging Face Inference client with the API key
 client = InferenceClient(
     provider="hf-inference",
-    api_key="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",  # Replace with your actual API key
+    api_key=huggingface_api_key,  # Use the API key loaded from environment
 )
 
 # Function to perform sentiment analysis (emotion detection)
