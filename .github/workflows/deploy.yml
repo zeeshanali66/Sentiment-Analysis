@@ -1,0 +1,35 @@
+name: Deploy Sentiment Analysis
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow when changes are pushed to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # The operating system to run the job on
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Use the latest Python version
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt  # Install dependencies from requirements.txt
+
+      # Step 4: Set Hugging Face API key as an environment variable
+      - name: Set Hugging Face API key
+        run: echo "HUGGINGFACE_API_KEY=${{ secrets.HUGGINGFACE_API_KEY }}" >> $GITHUB_ENV  # Set the secret as environment variable
+
+      # Step 5: Run the application (Flask app or any Python script)
+      - name: Run Sentiment Analysis
+        run: |
+          python app.py  # Run the Python script that requires the Hugging Face API key
